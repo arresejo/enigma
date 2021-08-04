@@ -1,0 +1,841 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Enigma’s documentation! &#8212; Enigma 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-enigma-s-documentation">
+<h1>Welcome to Enigma’s documentation!<a class="headerlink" href="#welcome-to-enigma-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="module-pluglead">
+<span id="plug-lead"></span><h1>Plug lead<a class="headerlink" href="#module-pluglead" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="pluglead.PlugLead">
+<em class="property">class </em><code class="sig-prename descclassname">pluglead.</code><code class="sig-name descname">PlugLead</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chars</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pluglead.PlugLead" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plug Lead class</p>
+<p>This class simulates a lead that connect two plugs in the Enigma machine</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>chars</strong> (<em>str</em>) – A string that represents the two different characters the lead should connect</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeError,</span> <span class="pre">ValueError</span></code>: If the provided chars string is invalid</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Example::</dt><dd><p>lead = PlugLead(“AG”)
+lead.encode(“A”)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="pluglead.PlugLead.chars">
+<em class="property">property </em><code class="sig-name descname">chars</code><a class="headerlink" href="#pluglead.PlugLead.chars" title="Permalink to this definition">¶</a></dt>
+<dd><p>The two characters the plug lead connects</p>
+<dl class="field-list simple">
+<dt class="field-odd">Getter</dt>
+<dd class="field-odd"><p>Returns the plug lead’s characters</p>
+</dd>
+<dt class="field-even">Setter</dt>
+<dd class="field-even"><p>Sets the plug lead’s characters</p>
+</dd>
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-plugboard">
+<span id="plug-board"></span><h1>Plug board<a class="headerlink" href="#module-plugboard" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="plugboard.Plugboard">
+<em class="property">class </em><code class="sig-prename descclassname">plugboard.</code><code class="sig-name descname">Plugboard</code><a class="headerlink" href="#plugboard.Plugboard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plug Board class</p>
+<p>This class simulates a plug board that aggregate none or maximum 10 plug leads in the Enigma machine.</p>
+<dl>
+<dt>Example::</dt><dd><p>plugboard = Plugboard()</p>
+<p>plugboard.set(“FH TS BE UQ KD AL”)</p>
+<p>assert (plugboard.encode(“A”) == “L”)
+assert (plugboard.encode(“E”) == “B”)
+assert (plugboard.encode(“Z”) == “Z”)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="plugboard.Plugboard.add">
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plug_lead</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plugboard.Plugboard.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new plug lead to the plug board if the following conditions are met:
+- The plug lead is valid (e.g. not wiring a already allocated character)
+- A free location available on the plug board</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>plug_lead</strong> (<a class="reference internal" href="#pluglead.PlugLead" title="pluglead.PlugLead"><em>PlugLead</em></a>) – A valid Plug Lead</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeError,</span> <span class="pre">ValueError</span></code>: If there there is no free location on the plug board
+or if the provided plug lead is invalid</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="plugboard.Plugboard.encode">
+<code class="sig-name descname">encode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">char</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plugboard.Plugboard.encode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encode the provided character accordingly to plug board configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>char</strong> (<em>str</em>) – The character to encode</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The encoded character</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeError,</span> <span class="pre">ValueError</span></code>: If the provided character is invalid</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="plugboard.Plugboard.set">
+<code class="sig-name descname">set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plugboard.Plugboard.set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the provided plug board string and set the plug leads accordingly.</p>
+<p>The plug board string must be composed by one or several pairs of letters separated by a space.</p>
+<p>Add a new plug lead to the plug board if the following conditions are met:
+- The plug lead is valid (e.g. not wiring a already allocated character)
+- A free location available on the plug board</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>string</strong> (<em>str</em>) – A valid plug board string</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeError,</span> <span class="pre">ValueError</span></code>: If there there is no free location on the plug board
+or the provided plug board string is invalid</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Example::</dt><dd><p>PlugBoard().set(“FH TS BE UQ KD AL”)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reflector">
+<span id="reflector"></span><h1>Reflector<a class="headerlink" href="#module-reflector" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="reflector.Reflector">
+<em class="property">class </em><code class="sig-prename descclassname">reflector.</code><code class="sig-name descname">Reflector</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">wiring</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reflector.Reflector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic Reflector class</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>wiring</strong> (<em>str</em>) – The internal reflector wiring composed by 26 alphabetic characters in upper case</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeError,</span> <span class="pre">ValueError</span></code>: If the provided wiring string is invalid</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Example::</dt><dd><p>reflector = Reflector(“EJMZALYXVBWFCRQUONTSPIKHGD”)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="reflector.Reflector.wiring">
+<em class="property">property </em><code class="sig-name descname">wiring</code><a class="headerlink" href="#reflector.Reflector.wiring" title="Permalink to this definition">¶</a></dt>
+<dd><p>The reflector’s wiring</p>
+<dl class="field-list simple">
+<dt class="field-odd">Getter</dt>
+<dd class="field-odd"><p>Returns the reflector’s wiring</p>
+</dd>
+<dt class="field-even">Setter</dt>
+<dd class="field-even"><p>Sets the reflector’s wiring</p>
+</dd>
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="reflector.ReflectorA">
+<em class="property">class </em><code class="sig-prename descclassname">reflector.</code><code class="sig-name descname">ReflectorA</code><a class="headerlink" href="#reflector.ReflectorA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reflector A class</p>
+<p>This class simulates a reflector with wiring pattern A in the Enigma machine</p>
+<dl class="simple">
+<dt>Example::</dt><dd><p>reflector = ReflectorA()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="reflector.ReflectorB">
+<em class="property">class </em><code class="sig-prename descclassname">reflector.</code><code class="sig-name descname">ReflectorB</code><a class="headerlink" href="#reflector.ReflectorB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reflector B class</p>
+<p>This class simulates a reflector with wiring pattern B in the Enigma machine</p>
+<dl class="simple">
+<dt>Example::</dt><dd><p>reflector = ReflectorB()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="reflector.ReflectorBThin">
+<em class="property">class </em><code class="sig-prename descclassname">reflector.</code><code class="sig-name descname">ReflectorBThin</code><a class="headerlink" href="#reflector.ReflectorBThin" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt id="reflector.ReflectorC">
+<em class="property">class </em><code class="sig-prename descclassname">reflector.</code><code class="sig-name descname">ReflectorC</code><a class="headerlink" href="#reflector.ReflectorC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reflector C class</p>
+<p>This class simulates a reflector with wiring pattern C in the Enigma machine</p>
+<dl class="simple">
+<dt>Example::</dt><dd><p>reflector = ReflectorC()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="reflector.ReflectorCThin">
+<em class="property">class </em><code class="sig-prename descclassname">reflector.</code><code class="sig-name descname">ReflectorCThin</code><a class="headerlink" href="#reflector.ReflectorCThin" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-rotor">
+<span id="rotor"></span><h1>Rotor<a class="headerlink" href="#module-rotor" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="rotor.Rotor">
+<em class="property">class </em><code class="sig-prename descclassname">rotor.</code><code class="sig-name descname">Rotor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">wiring</span></em>, <em class="sig-param"><span class="n">notch</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">position</span><span class="o">=</span><span class="default_value">'A'</span></em>, <em class="sig-param"><span class="n">ring_setting</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rotor.Rotor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic Rotor class</p>
+<p>This class simulates a rotor with custom wiring pattern in the Enigma machine. It provides functions for mainly
+perform the bidirectional encoding (left-to-right and right-to-left) and the rotation of the rotor.</p>
+<p>Two translation tables are built internally in order to encode a character form the bidirectional encoding:
+- right-to-left table: mapping alphabetic characters from A to Z to the wiring characters
+- left-to-right mapping the wiring characters to the alphabetic characters from A to Z</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wiring</strong> (<em>str</em>) – The internal rotor wiring composed by 26 alphabetic characters in upper case</p></li>
+<li><p><strong>notch</strong> (<em>str</em>) – The character corresponding to the notch (default value is None)</p></li>
+<li><p><strong>position</strong> (<em>str</em>) – The character corresponding to the rotor’s start position (default value is “A”)</p></li>
+<li><p><strong>ring_setting</strong> (<em>int</em>) – The one-based rotor’s ring setting (default value is 1)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeError,</span> <span class="pre">ValueError</span></code>: If one of the provided parameter is invalid</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All the class members are ring setting agnostic</p>
+</div>
+<dl class="simple">
+<dt>Example::</dt><dd><p>rotor = Rotor(“FSOKANUERHMBTIYCWLQPZXVGJD”)
+assert (rotor.encode_left_to_right(“A”) == “E”)
+assert (rotor.encode_right_to_left(“A”) == “F”)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="rotor.Rotor.char_position">
+<em class="property">property </em><code class="sig-name descname">char_position</code><a class="headerlink" href="#rotor.Rotor.char_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>The rotor’s position character</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use <a class="reference internal" href="#rotor.Rotor.position" title="rotor.Rotor.position"><code class="xref py py-func docutils literal notranslate"><span class="pre">position</span></code></a> to get the the 0-based index</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The character corresponding to the current rotor’s position</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rotor.Rotor.encode_left_to_right">
+<code class="sig-name descname">encode_left_to_right</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">char</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rotor.Rotor.encode_left_to_right" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encode the provided character accordingly to the left to right translation table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>char</strong> (<em>str</em>) – The character to encode</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The encoded character</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeError,</span> <span class="pre">ValueError</span></code>: If the provided character is invalid</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rotor.Rotor.encode_right_to_left">
+<code class="sig-name descname">encode_right_to_left</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">char</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rotor.Rotor.encode_right_to_left" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encode the provided character accordingly to the right to left translation table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>char</strong> (<em>str</em>) – The character to encode</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The encoded character</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeError,</span> <span class="pre">ValueError</span></code>: If the provided character is invalid</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rotor.Rotor.notch">
+<em class="property">property </em><code class="sig-name descname">notch</code><a class="headerlink" href="#rotor.Rotor.notch" title="Permalink to this definition">¶</a></dt>
+<dd><p>The rotor’s notch</p>
+<dl class="field-list simple">
+<dt class="field-odd">Getter</dt>
+<dd class="field-odd"><p>Returns the 0-based index of the notch’s character</p>
+</dd>
+<dt class="field-even">Setter</dt>
+<dd class="field-even"><p>Sets the notch’s character</p>
+</dd>
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int for the getter, str for the setter</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeError,</span> <span class="pre">ValueError</span></code>: If the provided notch’s character is invalid</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rotor.Rotor.on_notch_position">
+<em class="property">property </em><code class="sig-name descname">on_notch_position</code><a class="headerlink" href="#rotor.Rotor.on_notch_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the rotor is on notch position</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if the current rotor’s position is on notch, False otherwise</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rotor.Rotor.position">
+<em class="property">property </em><code class="sig-name descname">position</code><a class="headerlink" href="#rotor.Rotor.position" title="Permalink to this definition">¶</a></dt>
+<dd><p>The rotor’s position</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use the Use <a class="reference internal" href="#rotor.Rotor.char_position" title="rotor.Rotor.char_position"><code class="xref py py-func docutils literal notranslate"><span class="pre">position</span></code></a> to get position’s character</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Getter</dt>
+<dd class="field-odd"><p>Returns the 0-based index of the rotor’s position</p>
+</dd>
+<dt class="field-even">Setter</dt>
+<dd class="field-even"><p>Sets the rotor’s position character</p>
+</dd>
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int for the getter, str for the setter</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rotor.Rotor.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rotor.Rotor.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the rotor position to “A” and the ring setting to 1</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rotor.Rotor.ring_setting">
+<em class="property">property </em><code class="sig-name descname">ring_setting</code><a class="headerlink" href="#rotor.Rotor.ring_setting" title="Permalink to this definition">¶</a></dt>
+<dd><p>The rotor’s ring setting</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The ring setting allowed range of values is 1-26</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Getter</dt>
+<dd class="field-odd"><p>Returns the value of the ring setting</p>
+</dd>
+<dt class="field-even">Setter</dt>
+<dd class="field-even"><p>Sets the value of the ring setting</p>
+</dd>
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeError,</span> <span class="pre">ValueError</span></code>: If the provided ring setting invalid</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rotor.Rotor.rotate">
+<code class="sig-name descname">rotate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rotor.Rotor.rotate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform one rotation step of the rotor, it updates the position to the next wiring character (circular update)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="rotor.RotorBeta">
+<em class="property">class </em><code class="sig-prename descclassname">rotor.</code><code class="sig-name descname">RotorBeta</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">position</span><span class="o">=</span><span class="default_value">'A'</span></em>, <em class="sig-param"><span class="n">ring_setting</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rotor.RotorBeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotor Beta class</p>
+<p>This class simulates a rotor with wiring pattern Beta in the Enigma machine</p>
+<dl class="simple">
+<dt>Example::</dt><dd><p>rotor = RotorBeta()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="rotor.RotorGamma">
+<em class="property">class </em><code class="sig-prename descclassname">rotor.</code><code class="sig-name descname">RotorGamma</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">position</span><span class="o">=</span><span class="default_value">'A'</span></em>, <em class="sig-param"><span class="n">ring_setting</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rotor.RotorGamma" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotor Gamma class</p>
+<p>This class simulates a rotor with wiring pattern Gamma in the Enigma machine</p>
+<dl class="simple">
+<dt>Example::</dt><dd><p>rotor = RotorGamma()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="rotor.RotorI">
+<em class="property">class </em><code class="sig-prename descclassname">rotor.</code><code class="sig-name descname">RotorI</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">position</span><span class="o">=</span><span class="default_value">'A'</span></em>, <em class="sig-param"><span class="n">ring_setting</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rotor.RotorI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotor I class</p>
+<p>This class simulates a rotor with wiring pattern I in the Enigma machine</p>
+<dl class="simple">
+<dt>Example::</dt><dd><p>rotor = RotorI()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="rotor.RotorII">
+<em class="property">class </em><code class="sig-prename descclassname">rotor.</code><code class="sig-name descname">RotorII</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">position</span><span class="o">=</span><span class="default_value">'A'</span></em>, <em class="sig-param"><span class="n">ring_setting</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rotor.RotorII" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotor II class</p>
+<p>This class simulates a rotor with wiring pattern II in the Enigma machine</p>
+<dl class="simple">
+<dt>Example::</dt><dd><p>rotor = RotorII()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="rotor.RotorIII">
+<em class="property">class </em><code class="sig-prename descclassname">rotor.</code><code class="sig-name descname">RotorIII</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">position</span><span class="o">=</span><span class="default_value">'A'</span></em>, <em class="sig-param"><span class="n">ring_setting</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rotor.RotorIII" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotor III class</p>
+<p>This class simulates a rotor with wiring pattern III in the Enigma machine</p>
+<dl class="simple">
+<dt>Example::</dt><dd><p>rotor = RotorIII()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="rotor.RotorIV">
+<em class="property">class </em><code class="sig-prename descclassname">rotor.</code><code class="sig-name descname">RotorIV</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">position</span><span class="o">=</span><span class="default_value">'A'</span></em>, <em class="sig-param"><span class="n">ring_setting</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rotor.RotorIV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotor IV class</p>
+<p>This class simulates a rotor with wiring pattern IV in the Enigma machine</p>
+<dl class="simple">
+<dt>Example::</dt><dd><p>rotor = RotorIV()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="rotor.RotorV">
+<em class="property">class </em><code class="sig-prename descclassname">rotor.</code><code class="sig-name descname">RotorV</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">position</span><span class="o">=</span><span class="default_value">'A'</span></em>, <em class="sig-param"><span class="n">ring_setting</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rotor.RotorV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotor V class</p>
+<p>This class simulates a rotor with wiring pattern V in the Enigma machine</p>
+<dl class="simple">
+<dt>Example::</dt><dd><p>rotor = RotorV()</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-rotorchain">
+<span id="rotor-chain"></span><h1>Rotor chain<a class="headerlink" href="#module-rotorchain" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="rotorchain.RotorChain">
+<em class="property">class </em><code class="sig-prename descclassname">rotorchain.</code><code class="sig-name descname">RotorChain</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">reflector</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">rotors</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rotorchain.RotorChain" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class simulates a rotor chain in the Enigma machine</p>
+<p>As models M3 and M4 of the Enigma machine, it supports 3 or 4 rotors configuration and allows to encode a character
+through the whole rotor chain, it handles also the rotation and ring setting logic.</p>
+<p>The order of reflector and rotors definition respect the physical order (left-to-right).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reflector</strong> (<a class="reference internal" href="#reflector.Reflector" title="reflector.Reflector"><em>Reflector</em></a>) – The reflector associated to the rotor chain</p></li>
+<li><p><strong>*rotors</strong> – <p>The rotors associated to the rotor chain</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeError,</span> <span class="pre">ValueError</span></code>: If one of the provided parameter is invalid</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="rotorchain.RotorChain.encode">
+<code class="sig-name descname">encode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">char</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rotorchain.RotorChain.encode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform first of all a rotation step then the whole encoding of a character through the rotor chain</p>
+<p>The character to encode follows the path defined by the aggregation of reflectors and rotors wiring inside the
+rotor chain. It starts first from a right-to-left encoding through the rotors then a left-to-right encoding by
+the reflector and finally a left to right encoding.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>char</strong> (<em>str</em>) – The character to encode</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The encoded character</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rotorchain.RotorChain.encode_left_to_right">
+<code class="sig-name descname">encode_left_to_right</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">char</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rotorchain.RotorChain.encode_left_to_right" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper function for the left-to-right encoding, see __encode_rotor_chain</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>char</strong> (<em>str</em>) – The character to encode</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The encoded character</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rotorchain.RotorChain.encode_right_to_left">
+<code class="sig-name descname">encode_right_to_left</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">char</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rotorchain.RotorChain.encode_right_to_left" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper function for the right-to-left encoding, see __encode_rotor_chain</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>char</strong> (<em>str</em>) – The character to encode</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The encoded character</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rotorchain.RotorChain.reflector">
+<em class="property">property </em><code class="sig-name descname">reflector</code><a class="headerlink" href="#rotorchain.RotorChain.reflector" title="Permalink to this definition">¶</a></dt>
+<dd><p>The reflector belonging to the chain</p>
+<dl class="field-list simple">
+<dt class="field-odd">Getter</dt>
+<dd class="field-odd"><p>Returns the reflector</p>
+</dd>
+<dt class="field-even">Setter</dt>
+<dd class="field-even"><p>Sets the reflector</p>
+</dd>
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#reflector.Reflector" title="reflector.Reflector">Reflector</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeError</span></code>: If the provided reflector is invalid</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rotorchain.RotorChain.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rotorchain.RotorChain.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset all rotors of the chain to position to “A” and the ring setting to 1</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rotorchain.RotorChain.rotate">
+<code class="sig-name descname">rotate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rotorchain.RotorChain.rotate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform one rotation step of the rotor chain taking into account physical properties like notches on the rotors.</p>
+<p>As described below, the rotation logic is almost the same in both cases we have 3 or 4 rotors.</p>
+<p>In the case of the 3 rotors chain, we start by the rotation of the leftmost rotor. If we consider the following
+rotor chain composed by 3 rotors, lets say R1, R2 and R3. We have two distinct cases of rotation:
+- If R2 is on notch position, R2 and R1 rotate
+- If R3 is on notch position, R2 rotates
+Finally, R3 always rotates.</p>
+<p>In the case of the 4 rotors chain, we start by the rotation of the second rotor from the left because the fourth
+rotor never rotates. If we consider the following rotor chain composed by 4 rotors, lets say R1, R2, R3 and R4.
+We have also two distinct cases of rotations:
+- If R3 is on notch position, R3 and R2 rotate
+- If R4 is on notch position, R3 rotates
+Finally, R4 always rotates.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rotorchain.RotorChain.rotors">
+<em class="property">property </em><code class="sig-name descname">rotors</code><a class="headerlink" href="#rotorchain.RotorChain.rotors" title="Permalink to this definition">¶</a></dt>
+<dd><p>The list of 3 or 4 rotors belonging to the chain</p>
+<dl class="field-list simple">
+<dt class="field-odd">Getter</dt>
+<dd class="field-odd"><p>Returns the list of rotors</p>
+</dd>
+<dt class="field-even">Setter</dt>
+<dd class="field-even"><p>Sets the list of rotors</p>
+</dd>
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Rotors list</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeError,</span> <span class="pre">ValueError</span></code>: If the provided list of rotors is invalid</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rotorchain.RotorChain.state">
+<em class="property">property </em><code class="sig-name descname">state</code><a class="headerlink" href="#rotorchain.RotorChain.state" title="Permalink to this definition">¶</a></dt>
+<dd><p>The current state of the rotor chain</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The state returned by this getter is ring setting agnostic</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dictionary with the state of the rotor chain, each key-value pair contains to the rotor’s name and
+the character corresponding to its position</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-enigma">
+<span id="enigma"></span><h1>Enigma<a class="headerlink" href="#module-enigma" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="enigma.Enigma">
+<em class="property">class </em><code class="sig-prename descclassname">enigma.</code><code class="sig-name descname">Enigma</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">reflector</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">rotors</span></em><span class="sig-paren">)</span><a class="headerlink" href="#enigma.Enigma" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class simulates the Enigma machine</p>
+<p>As models M3 and M4 of the Enigma machine, it supports 3 or 4 rotors configuration.</p>
+<p>The order of reflector and rotors definition respect the physical order (left-to-right).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reflector</strong> (<a class="reference internal" href="#reflector.Reflector" title="reflector.Reflector"><em>Reflector</em></a>) – The reflector associated to the Enigma machine</p></li>
+<li><p><strong>*rotors</strong> – <p>The rotors associated to the Enigma machine</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeError,</span> <span class="pre">ValueError</span></code>: If one of the provided parameter is invalid</p>
+</dd>
+</dl>
+<dl>
+<dt>Example::</dt><dd><p>enigma = Enigma(ReflectorB(), RotorI(), RotorII(), RotorIII(“V”))
+enigma.encode(“HELLOWORLDHELLOWORLDHELLOWORLD”)</p>
+<p>enigma = Enigma(ReflectorA(), RotorIV(“E”, 18), RotorV(“Z”, 24), RotorBeta(“G”, 3), RotorI(“P”, 5))
+enigma.plugboard.set(“PC XZ FM QA ST NB HY OR EV IU”)
+enigma.encode(“BUPXWJCDPFASXBDHLBBIBSRNWCSZXQOLBNXYAXVHOGCUUIBCVMPUZYUUKHI”)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="enigma.Enigma.encode">
+<code class="sig-name descname">encode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em><span class="sig-paren">)</span><a class="headerlink" href="#enigma.Enigma.encode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform the whole encoding of a string on the Enigma machine</p>
+<p>Each character of the string is first encoded by the plug board then the character is encoded through the
+rotor chain and finally the character is encoded by the plug board again.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>char</strong> (<em>str</em>) – The string to encode</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The encoded string</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="enigma.Enigma.plugboard">
+<em class="property">property </em><code class="sig-name descname">plugboard</code><a class="headerlink" href="#enigma.Enigma.plugboard" title="Permalink to this definition">¶</a></dt>
+<dd><p>The plug board associated to the Enigma machine</p>
+<dl class="field-list simple">
+<dt class="field-odd">Getter</dt>
+<dd class="field-odd"><p>Returns the plug board</p>
+</dd>
+<dt class="field-even">Setter</dt>
+<dd class="field-even"><p>Sets the plug board</p>
+</dd>
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#plugboard.Plugboard" title="plugboard.Plugboard">Plugboard</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="enigma.Enigma.reflector">
+<em class="property">property </em><code class="sig-name descname">reflector</code><a class="headerlink" href="#enigma.Enigma.reflector" title="Permalink to this definition">¶</a></dt>
+<dd><p>The reflector associated to the Enigma machine</p>
+<dl class="field-list simple">
+<dt class="field-odd">Getter</dt>
+<dd class="field-odd"><p>Returns the reflector</p>
+</dd>
+<dt class="field-even">Setter</dt>
+<dd class="field-even"><p>Sets the reflector</p>
+</dd>
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#reflector.Reflector" title="reflector.Reflector">Reflector</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="enigma.Enigma.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#enigma.Enigma.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset all rotors of the machine to position to “A” and the ring setting to 1</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="enigma.Enigma.rotors">
+<em class="property">property </em><code class="sig-name descname">rotors</code><a class="headerlink" href="#enigma.Enigma.rotors" title="Permalink to this definition">¶</a></dt>
+<dd><p>The rotors associated to the Enigma machine</p>
+<dl class="field-list simple">
+<dt class="field-odd">Getter</dt>
+<dd class="field-odd"><p>Returns the list of rotors</p>
+</dd>
+<dt class="field-even">Setter</dt>
+<dd class="field-even"><p>Sets the list of rotors</p>
+</dd>
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Rotors list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Enigma</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Student.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
